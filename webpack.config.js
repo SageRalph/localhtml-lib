@@ -1,3 +1,4 @@
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const path = require("path");
 
@@ -23,9 +24,9 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-        use: ["base64-inline-loader"],
+        type: "asset/inline",
       },
     ],
   },
-  plugins: [new CompressionPlugin()],
+  plugins: [new CompressionPlugin(), new CleanWebpackPlugin()],
 };
