@@ -1,0 +1,237 @@
+#lh-button-import {
+  background: url("../node_modules/@fortawesome/fontawesome-free/svgs/solid/file-upload.svg")
+    no-repeat;
+}
+#lh-button-clear {
+  background: url("../node_modules/@fortawesome/fontawesome-free/svgs/solid/trash.svg")
+    no-repeat;
+}
+#lh-button-save {
+  background: url("../node_modules/@fortawesome/fontawesome-free/svgs/solid/save.svg")
+    no-repeat;
+}
+#lh-button-export {
+  background: url("../node_modules/@fortawesome/fontawesome-free/svgs/solid/print.svg")
+    no-repeat;
+}
+.lh-button-toggle {
+  background: url("../node_modules/@fortawesome/fontawesome-free/svgs/regular/square.svg")
+    no-repeat;
+}
+.lh-button-toggle-on {
+  background: url("../node_modules/@fortawesome/fontawesome-free/svgs/regular/check-square.svg")
+    no-repeat;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding-bottom: 10rem;
+  background-color: #f1f1f1;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.lh-document-container {
+  max-width: 935px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lh-document-container > *:not(.lh-page-wrapper):not(.lh-page) {
+  margin: 3rem auto;
+  width: 935px;
+}
+
+.lh-page-wrapper:not(.lh-extra-page),
+.lh-page:not(.lh-extra-page) {
+  /* Add border to match Quill editors */
+  border: 1px solid #ccc;
+}
+
+.lh-page-area,
+.lh-page {
+  position: relative;
+  width: 935px;
+  margin: 20px auto 40px auto;
+  background-color: white;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.lh-page {
+  height: 1210px;
+}
+
+.lh-quill-page div.ql-container {
+  height: 1210px;
+  padding: 52px;
+}
+
+.lh-page-toolbar {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 935px;
+  margin: 5rem auto 0 auto;
+}
+
+.lh-page-toolbar h2 {
+  display: inline-block;
+  margin: 1rem;
+  margin-left: 3rem;
+}
+
+.lh-page-toolbar .lh-button-wrapper {
+  float: right;
+  margin: 0.5rem;
+  margin-right: 3rem;
+}
+
+.lh-button-wrapper button {
+  height: 3rem;
+  width: 3rem;
+  margin-left: 1rem;
+  font-size: 2rem;
+}
+
+.lh-aside {
+  padding: 5rem;
+  width: 15rem;
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  top: 0;
+}
+
+.lh-aside button {
+  padding: 0.5rem;
+  padding-left: 4rem;
+  font-size: 1rem;
+  width: 100%;
+  margin: 2rem 0;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+}
+
+.lh-aside p {
+  font-size: 0.8rem;
+}
+
+.lh-aside input[type="file"] {
+  display: none;
+}
+
+#lh-info-frame {
+  /* display: none; */
+  width: 100%;
+  height: calc(100% - 10rem);
+  border: none;
+  margin: 0;
+}
+
+.lh-quill-field .ql-editor a {
+  /* Quill has it's own underline option, so don't force it for all links */
+  text-decoration: none !important;
+}
+
+div.ql-editor {
+  padding: 0;
+}
+
+@media print {
+  @page {
+    size: auto;
+    margin: 0;
+    padding: 0;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .lh-page-area *,
+  .lh-page * {
+    visibility: visible;
+  }
+  body,
+  html {
+    padding-top: 0;
+  }
+  html,
+  body {
+    height: 99%;
+    page-break-after: avoid;
+    page-break-before: avoid;
+  }
+  .lh-page-area,
+  .lh-page {
+    margin: 0 auto;
+    padding-top: 52px;
+    page-break-after: always;
+    visibility: visible;
+    border: none;
+    /* Required for background image to print */
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  .lh-page-wrapper:not(.lh-extra-page),
+  .lh-page:not(.lh-extra-page) {
+    border: none;
+  }
+  .lh-quill-page div.ql-container {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+    height: 1158px;
+  }
+  .ql-toolbar {
+    display: none;
+  }
+  .lh-page-toolbar {
+    display: none;
+  }
+  .lh-document-container > *:not(.lh-page-wrapper):not(.lh-page) {
+    display: none;
+  }
+  a,
+  .lh-quill-field .ql-editor a {
+    color: black;
+  }
+}
+
+@media screen and (max-width: calc(935px + 60rem)) {
+  .lh-info-container {
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: calc(935px + 50rem)) {
+  .lh-document-container {
+    margin-left: 25rem;
+  }
+  /* Not supported on narrow screens */
+  .lh-info-container {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: calc(935px + 27rem)) {
+  .lh-aside {
+    position: relative;
+    padding: 2rem;
+    width: 100%;
+    max-width: 46rem;
+    margin: auto;
+  }
+  .lh-aside button {
+    margin-left: auto;
+    margin-right: auto;
+    width: 15rem;
+  }
+  .lh-document-container {
+    margin-left: auto;
+  }
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <title>localhtml</title>
+    <script src="localhtml.min.js"></script>
+  </head>
+
+  <body>
+    <aside class="lh-aside">
+      <h1>localhtml Example</h1>
+      <div id="menuContainer"></div>
+    </aside>
+
+    <aside id="infoContainer" class="lh-aside">
+      <h2>Sidebar</h2>
+      <p>This content is in the sidebar</p>
+    </aside>
+
+    <main id="documentContainer">
+      <form class="lh-page">
+        <h1>Example Document</h1>
+        <p>This content is in the sheet</p>
+        <label>
+          <strong>Text Field</strong>
+          <input type="text" name="myTextField" />
+        </label>
+        <article name="myQuillField" class="lh-quill-field"></article>
+      </form>
+    </main>
+
+    <script>
+      new localhtml({
+        documentContainer: "#documentContainer",
+        menuContainer: "#menuContainer",
+        infoContainer: "#infoContainer",
+        formSelector: "form",
+        hotkeysEnabled: true,
+      });
+    </script>
+    <style>
+      #infoContainer {
+        right: 0;
+        width: 25rem;
+        position: fixed;
+      }
+      .lh-page {
+        padding: 3rem;
+      }
+      form .lh-quill-field {
+        border: 1px solid lightgray;
+        min-width: 80%;
+        padding: 1rem;
+      }
+      form label {
+        display: block;
+        padding: 1rem;
+        padding-left: 0;
+        margin: 0.5rem 0;
+      }
+      form label input {
+        margin: 0 1rem;
+      }
+    </style>
+  </body>
+</html>

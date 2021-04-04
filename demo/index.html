@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 
+    NOTE: All content must be inlined for offline usage (e.g. using webpack),
+    localhtml-lib will inline itself automatically if included by script src.
+  -->
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <title>localhtml</title>
+    <script src="localhtml.min.js"></script>
+  </head>
+
+  <body>
+    <!-- The lh-aside class provides some default stylings for side menus -->
+    <aside class="lh-aside">
+      <h1>localhtml demo</h1>
+      <div id="menuContainer">
+        <!-- The content of the menu will be injected here -->
+      </div>
+      <!-- 
+        Buttons with the class lh-button-toggle can be tied to a hidden input in a form for persistance.
+        You need to add a button with the "lh-button-toggle" class and an id, and an input with a name matching that id. The input must be inside a form.
+        e.g. The following example is saved as data["myToggle"]
+      -->
+      <button
+        id="myToggle"
+        class="lh-button-toggle"
+        title="Custom toggleable menu item"
+      >
+        Custom Toggle
+      </button>
+      <form><input type="hidden" name="myToggle" value="false" /></form>
+    </aside>
+
+    <aside id="infoContainer" class="lh-aside">
+      <!-- 
+        This panel can be shown/hidden from the menu.
+        An iframe will be injected here if infoURL is set.
+        Alternatively, you can hardcode anything you want here (e.g. instructions).
+      -->
+    </aside>
+
+    <main id="documentContainer">
+      <!-- Various editor components will be injected here -->
+      <!-- 
+        When printing only content inside an lh-page is included.
+        Each lh-page is US Letter paper size (i.e. one side of paper).
+      -->
+      <form class="lh-page">
+        <h1>Welcome to localhtml</h1>
+        <p>
+          Any changes made to the content of these pages is persisted when
+          saving, and the full functionality of the document is available
+          offline just by opening the HTML file (all the source code and state
+          data are included in the file). You can create pages in content.html
+          with forms which can save arbitrary data. Form controls serialise to a
+          key matching their name property. What name you choose only matters if
+          you want to implement your own logic with JavaScript, but every form
+          element must have a unique name for it to be saved.
+        </p>
+        <p>
+          e.g. &ltinput name="fileNameField"/&gt is saved to
+          data["fileNameField"]
+        </p>
+        <label>
+          <strong>File Name</strong>
+          <input type="text" name="fileNameField" />
+        </label>
+        <p>
+          Users can add extra pages using the controls at the bottom of the
+          page. These pages can only be full-page rich text editors, but can be
+          added, removed, and rearranged at any time. You can also add rich text
+          editors to forms, as shown here.
+        </p>
+        <!-- The lh-quill-field class turns a container into a rich text editor -->
+        <article name="myQuillField" class="lh-quill-field"></article>
+        <p>
+          Each page is 1-to-1 size of US letter paper and when you print the
+          document everything else is stripped away, so you can treat the pages
+          just like real paper.
+        </p>
+      </form>
+
+      <h2>Did you know?</h2>
+      <p>
+        You can add content outside of a page element, but it will be excluded
+        when printing.
+      </p>
+
+      <form class="lh-page">
+        <p>
+          You can have multiple pre-defined forms and pages, but they cannot be
+          reordered or deleted by the user.
+        </p>
+        <p>
+          The data for all forms is saved as one object, so field names must be
+          unique across all forms. However, this also means that you can move
+          fields from one form to another without breaking backwards
+          compatibility.
+        </p>
+        <p>
+          The data object is generated when needed by reading the form controls,
+          so you can modify their values using JavaScript in all the usual ways.
+        </p>
+      </form>
+    </main>
+
+    <script>
+      /**
+       * Return a suggested filename when saving the sheet.
+       * @param {Object} data The sheet data object with keys for each named form input
+       * @returns {String} The suggested filename (without extension)
+       */
+      function customSheetName(data) {
+        // Put your custom file naming logic here.
+        // If the return value is falsy, config.DEFAULT_SHEET_NAME is used instead.
+        return data["fileNameField"];
+      }
+
+      /**
+       * Modify the data object to comply with any format changes when importing.
+       * @param {Object} data The old sheet data object with keys for each named form input
+       * @returns {Object} The data object in the format used by this version
+       */
+      function migrations(data) {
+        // versionBefore is a utility function for checking how old the data format is.
+        // It compares the semantic version of data object to the string provided.
+        //
+        // If the version cannot be migrated, you can throw an error here
+
+        if (localhtml.api.versionBefore(data, "1.0.0")) {
+          console.log("RUNNING MIGRATION: Updating from pre-release!");
+          // data['newFieldName'] = data['oldFieldName']
+        }
+        return data;
+      }
+
+      /**
+       * Called whenever the contents of the sheet is changed.
+       */
+      function dataChangedAction() {
+        console.log("Data changed");
+        // Prevent accidental navigation
+        window.onbeforeunload = function () {
+          return true;
+        };
+      }
+
+      new localhtml({
+        // The semver version of the sheet - Required for automatic updates
+        version: "1.0.0",
+
+        // The document editor will be injected here
+        documentContainer: "#documentContainer",
+
+        // The menu will be injected here
+        menuContainer: "#menuContainer",
+
+        // The info frame will be injected here
+        infoContainer: "#infoContainer",
+
+        // Only forms matching this selector will have data persisted
+        formSelector: "form",
+
+        // event handler for changes to the sheet data
+        dataChangedAction: dataChangedAction,
+
+        // Cooldown for the change event handler
+        dataChangedCooldown: 3000,
+
+        // Function to be run when importing data
+        migrations: migrations,
+
+        // Suggested filename if customSheetName is unset or returns something invalid
+        defaultSheetName: "New Document",
+
+        // Function for determining the suggested filename when saving
+        customSheetName: customSheetName,
+
+        // Target URL for the the info frame
+        infoURL: "https://example.com",
+
+        // URL of the latest version of the sheet - Required for automatic updates
+        latestVersionURL: "https://example.com",
+
+        // If true, ctrl+s will prompt saving the sheet
+        hotkeysEnabled: true,
+
+        // Function for logging
+        log: console.log,
+      });
+    </script>
+    <style>
+      #infoContainer {
+        right: 0;
+        width: 25rem;
+        position: fixed;
+      }
+      .lh-page {
+        padding: 3rem;
+      }
+      form .lh-quill-field {
+        border: 1px solid lightgray;
+        min-width: 80%;
+        padding: 1rem;
+      }
+      form p {
+        text-align: justify;
+      }
+      form label {
+        display: block;
+        padding: 1rem;
+        padding-left: 0;
+        margin: 0.5rem 0;
+      }
+      form label input {
+        margin: 0 1rem;
+      }
+    </style>
+  </body>
+</html>
