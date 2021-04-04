@@ -56,8 +56,15 @@ export default class localhtml {
 
     // Create data container if not exists
     if (!$("#sheetData").length) {
-      $(`<div id="sheetData" hidden=""></div>`).prependTo(documentContainer);
+      $(`<div id="sheetData" style="display: none" hidden=""></div>`).prependTo(
+        documentContainer
+      );
     }
+
+    // Create quill event watcher
+    $(
+      `<div id="lh-event-watcher" class="lh-no-save" style="display: none" hidden=""></div>`
+    ).prependTo(documentContainer);
 
     // Create add page button
     $(`
@@ -128,7 +135,7 @@ export default class localhtml {
 
     this.log("SETUP FORM");
     this.form.loadFromFile();
-    $(`${this.formSelector}, .lh-quill-field`).on("change", (e) =>
+    $(`${this.formSelector}, #lh-event-watcher`).on("change", (e) =>
       this._dataChanged(e)
     );
 

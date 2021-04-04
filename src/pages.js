@@ -192,7 +192,7 @@ export default class Pages {
     const child = $("<div></div>").get(0);
     $(element).append(child);
     const editor = new Quill(child, options);
-    editor.on("text-change", (e) => $(element).trigger("change"));
+    editor.on("text-change", (e) => $("#lh-event-watcher").trigger("change"));
     this.quills.push({
       name: $(element).attr("name"),
       editor,
