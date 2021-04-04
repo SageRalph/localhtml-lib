@@ -73,7 +73,7 @@ export default class Pages {
       const q = this.quills[i];
       data[q.name] = q.editor.getContents();
     }
-    data["this.extraPages"] = this.extraPages;
+    data["extraPages"] = this.extraPages;
     return data;
   }
 
