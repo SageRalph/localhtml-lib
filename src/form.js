@@ -124,8 +124,8 @@ export default class Form {
       const text = e.target.result;
 
       // Extract and parse sheet data
-      const exp = /<div id="sheetData" hidden="">(.*?)<\/div>/im;
-      const dataStr = exp.exec(text)[1];
+      const exp = /<div id="sheetData"(.*?)>(.*?)<\/div>/im;
+      const dataStr = exp.exec(text)[2];
       let data = JSON.parse(dataStr);
 
       if (me.migrations) {
