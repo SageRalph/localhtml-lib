@@ -68,33 +68,35 @@ export default class Meta {
   }
 
   updateCheck() {
-    // TODO - Needs a consistent method of getting the sheet version into the HTML at build time
+    if (location.hostname !== "") return; // Only local copies need to update
+    if (!this.latestVersionURL) return;
 
-    // if (location.hostname !== "") return; // Only local copies need to update
-    // if (!this.latestVersionURL) return;
-
-    // const me = this;
-    // me.log("CHECKING FOR UPDATES");
-    // const url = this.latestVersionURL + "?update";
-    // $.get(url, function (data) {
-    //   const match = data.match(/Build version: (.+?) -/);
-    //   const latest = match[1];
-    //   const current = $("#sheetVersion").text();
-    //   me.log("CURRENT VERSION: " + current);
-    //   me.log("LATEST VERSION: " + latest);
-    //   if (Meta.versionBefore({ sheetVersion: current }, latest)) {
-    //     me.log("NEWER VERSION AVAILABLE");
-    //     if (
-    //       confirm(
-    //         "A new document version is available. You can import this document to the new version. Would you like to update now?"
-    //       )
-    //     ) {
-    //       window.open(url, "_blank").focus();
-    //     }
-    //   } else {
-    //     me.log("UP TO DATE");
-    //   }
-    // });
+    const me = this;
+    me.log("CHECKING FOR UPDATES");
+    const url = this.latestVersionURL + "?update";
+    $.get(url, function (data) {
+      const match = data.match(/Build version: (.+?) -/);
+      if (!match) {
+        me.log("LATEST VERSION NOT FOUND");
+        return;
+      }
+      const latest = match[1];
+      const current = $("#sheetVersion").text();
+      me.log("CURRENT VERSION: " + current);
+      me.log("LATEST VERSION: " + latest);
+      if (Meta.versionBefore({ sheetVersion: current }, latest)) {
+        me.log("NEWER VERSION AVAILABLE");
+        if (
+          confirm(
+            "A new document version is available. You can import this document to the new version. Would you like to update now?"
+          )
+        ) {
+          window.open(url, "_blank").focus();
+        }
+      } else {
+        me.log("UP TO DATE");
+      }
+    });
   }
 
   /**

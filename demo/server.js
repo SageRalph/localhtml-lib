@@ -12,7 +12,7 @@ const path = require("path");
 
 http
   .createServer(function (request, response) {
-    let filePath = "demo" + request.url;
+    let filePath = "demo" + request.url.split("?")[0];
     if (filePath == "demo/") {
       filePath = "demo/index.html";
     } else if (filePath == "demo/localhtml.min.js") {
