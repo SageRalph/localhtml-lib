@@ -8,7 +8,8 @@
     "build": "webpack --mode='production'",
     "build-debug": "webpack --mode='development' -w",
     "demo": "node demo/server.js",
-    "dev": "webpack --mode=development && npm run demo"
+    "dev": "webpack --mode=development && npm run demo",
+    "nodemon": "nodemon --exec 'npm run dev' --ignore 'docs/' -e '*'"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "jquery": "^3.6.0",
     "jquery-deserialize": "^2.0.0-rc1",
     "jquery-serializejson": "^3.2.1",
+    "nodemon": "^2.0.7",
     "quill": "^1.3.7",
     "style-loader": "^2.0.0",
     "webpack": "^5.30.0",
