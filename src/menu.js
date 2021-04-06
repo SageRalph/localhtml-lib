@@ -69,17 +69,17 @@ export default class Menu {
   showInfo() {
     if (!this.infoContainer) return;
 
+    $("#lh-info-frame").remove();
+
     const state = $("input[name=opt_showInfo]").val() === "true";
 
     if (state) {
-      this.infoContainer.show();
-
       if (this.infoURL) {
-        $("#lh-info-frame").remove();
         $(
           `<iframe id="lh-info-frame" class="lh-no-save" src="${this.infoURL}"></iframe>`
         ).appendTo(this.infoContainer);
       }
+      this.infoContainer.show();
     } else {
       this.infoContainer.hide();
     }
