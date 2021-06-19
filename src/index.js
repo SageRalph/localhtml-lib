@@ -13,6 +13,7 @@ import Pages from "./pages";
 import Meta from "./meta";
 import Menu from "./menu";
 import Form from "./form";
+import Sidebar from "./sidebar";
 
 export default class localhtml {
   constructor({
@@ -91,9 +92,13 @@ export default class localhtml {
         throw "infoContainer must be or match a single element";
       this.infoContainer = infoContainer;
       infoContainer.addClass("lh-info-container");
+
+      this.sidebarContainer = $(`<div class="lh-sidebar-container"></div>`);
+      $(this.infoContainer).prepend(this.sidebarContainer);
     }
 
     this.menu = new Menu({ infoContainer, infoURL });
+    this.sidebar = new Sidebar({ sidebarContainer: this.sidebarContainer });
     this.pages = new Pages({ log });
     this.meta = new Meta({
       customSheetName,
@@ -103,6 +108,7 @@ export default class localhtml {
     });
     this.form = new Form({
       menu: this.menu,
+      sidebar: this.sidebar,
       pages: this.pages,
       meta: this.meta,
       formSelector,
@@ -118,6 +124,9 @@ export default class localhtml {
       clearData: this.form.clearData.bind(this.form),
       getSheetName: this.meta.sheetName.bind(this.meta),
       setInfoURL: this.menu.setInfoURL.bind(this.menu),
+      addWidget: this.sidebar.addWidget.bind(this.sidebar),
+      removeWidget: this.sidebar.removeWidget.bind(this.sidebar),
+      clearWidgetData: this.sidebar.clearWidgetData.bind(this.sidebar),
       versionBefore: Meta.versionBefore,
     };
 
@@ -151,6 +160,7 @@ export default class localhtml {
     $("#lh-button-save").on("click", (e) => this.form.saveHTML());
     $("#lh-button-clear").on("click", (e) => this.form.clearData());
     $("#lh-button-export").on("click", Form.savePDF);
+    $("#lh-button-widgets").on("click", (e) => this.sidebar.openManager());
     $("#lh-button-add").on("click", (e) => this.pages.addPage());
 
     // Click file import when Import button is clicked

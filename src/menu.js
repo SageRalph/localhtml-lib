@@ -96,6 +96,7 @@ export default class Menu {
         <button id="lh-button-export" title="Export document as a printable PDF file">
           Print
         </button>
+        <button id="lh-button-widgets" title="Add tools to the sidebar">Addons</button>
         <button
           id="opt_showInfo"
           class="lh-button-toggle"
