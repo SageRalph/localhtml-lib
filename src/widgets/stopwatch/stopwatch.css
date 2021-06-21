@@ -18,8 +18,14 @@
     no-repeat;
 }
 
+.lh-button-alarm-off {
+  background: url("../../../node_modules/@fortawesome/fontawesome-free/svgs/solid/bell-slash.svg")
+    no-repeat;
+  background-size: 125%;
+}
+
 .lh-stopwatch-form {
-  padding: 0 3rem;
+  padding: 0 1rem;
 }
 
 .lh-stopwatch-form input,
@@ -33,7 +39,20 @@
   cursor: pointer;
 }
 
+button[name="alarm-set"] {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-position: center;
+  float: right;
+  cursor: pointer;
+}
+
 .lh-stopwatch-elapsed {
   display: inline-block;
   margin: 0.5rem;
+}
+
+input.pickerStyles {
+  text-align: left;
 }

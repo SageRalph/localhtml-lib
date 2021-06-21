@@ -3,6 +3,7 @@
  * All widgets should be registered here.
  */
 
+import Dialog from "./dialog";
 import WidgetNotepad from "./widgets/notepad/notepad";
 import WidgetDice from "./widgets/dice/dice";
 import WidgetStopwatch from "./widgets/stopwatch/stopwatch";
@@ -34,9 +35,10 @@ export default class Sidebar {
       .filter((w) => !me.disabledWidgets.includes(w.type))
       .map(
         (w) =>
-          `<li>${
-            me.knownWidgets[w.type].name
-          } <button class="lh-button-remove-widget lh-button-close"></button></li>`
+          `<li>
+            ${me.knownWidgets[w.type].name} 
+            <button class="lh-button-remove-widget lh-button-close"></button>
+          </li>`
       )
       .join("");
 
@@ -45,38 +47,28 @@ export default class Sidebar {
       .map((k) => `<option value="${k}">${me.knownWidgets[k].name}</option>`)
       .join("");
 
-    this.closeManager();
-    $("body").append(`
-      <div class="lh-dialog-wrapper lh-no-save">
-        <form id="lh-widget-manager" class="lh-dialog">
-          <h2>Current Addons</h2>
-          <ol id="lh-widget-list">
-            ${currentWidgets || "None"}
-          </ol>
-          <h2>New Addon</h2>
-          <select name="type">
-            ${possibleWidgets}
-          </select>
-          <input type="submit" value="Add" id="lh-button-add-widget"/>
-          <input type="reset" value="" class="lh-button-close"/>
-        </form>
-      </div>
+    const manager = Dialog.show(`
+      <h2>Current Addons</h2>
+      <ol id="lh-widget-list">
+        ${currentWidgets || "None"}
+      </ol>
+      <h2>New Addon</h2>
+      <select name="type">
+        ${possibleWidgets}
+      </select>
+      <input type="submit" value="Add" id="lh-button-add-widget"/>
     `);
 
-    $("#lh-widget-manager .lh-button-remove-widget").on("click", function (e) {
+    manager.find(".lh-button-remove-widget").on("click", function (e) {
       e.preventDefault();
       const index = $(this).parent().index();
       me.removeWidget(index);
       me.openManager();
     });
 
-    $("#lh-widget-manager").on("reset", (e) => {
-      me.closeManager();
-    });
-
-    $("#lh-widget-manager").on("submit", (e) => {
+    manager.on("submit", (e) => {
       e.preventDefault();
-      const type = $("#lh-widget-manager [name=type]").val();
+      const type = manager.find("[name=type]").val();
       const data = { type };
       if (type === "browser" && this.infoURL) {
         data.contentData = { defaultURL: this.infoURL };
@@ -84,10 +76,6 @@ export default class Sidebar {
       me.addWidget(data);
       me.openManager();
     });
-  }
-
-  closeManager() {
-    $(".lh-dialog-wrapper").remove();
   }
 
   /**

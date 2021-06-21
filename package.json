@@ -1,6 +1,6 @@
 {
   "name": "localhtml-lib",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A library for building persistent editable HTML documents.",
   "main": "docs/localhtml.min.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "compression-webpack-plugin": "^7.1.2",
     "css-loader": "^5.2.0",
     "file-saver": "^2.0.5",
+    "html-duration-picker": "^2.2.13",
     "jquery": "^3.6.0",
     "jquery-deserialize": "^2.0.0-rc1",
     "jquery-serializejson": "^3.2.1",
