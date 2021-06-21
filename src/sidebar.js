@@ -3,16 +3,23 @@
  * All widgets should be registered here.
  */
 
+import Notepad from "./widgets/notepad/notepad";
 import Dice from "./widgets/dice/dice";
+import Browser from "./widgets/browser/browser";
 
 export default class Sidebar {
-  constructor({ sidebarContainer }) {
+  constructor({ sidebarContainer, infoURL = "", disabledWidgets = [], log }) {
     this.sidebarContainer = sidebarContainer;
+    this.log = log;
 
     this.widgets = [];
     this.knownWidgets = {
+      notepad: { name: "Notepad", registration: Notepad },
       dice: { name: "Dice Box", registration: Dice },
+      browser: { name: "Browser", registration: Browser },
     };
+    this.disabledWidgets = disabledWidgets;
+    this.setInfoURL(infoURL);
   }
 
   /**
@@ -22,6 +29,7 @@ export default class Sidebar {
     const me = this;
 
     const currentWidgets = this.widgets
+      .filter((w) => !me.disabledWidgets.includes(w.type))
       .map(
         (w) =>
           `<li>${
@@ -31,6 +39,7 @@ export default class Sidebar {
       .join("");
 
     const possibleWidgets = Object.keys(this.knownWidgets)
+      .filter((k) => !me.disabledWidgets.includes(k))
       .map((k) => `<option value="${k}">${me.knownWidgets[k].name}</option>`)
       .join("");
 
@@ -66,7 +75,11 @@ export default class Sidebar {
     $("#lh-widget-manager").on("submit", (e) => {
       e.preventDefault();
       const type = $("#lh-widget-manager [name=type]").val();
-      me.addWidget({ type });
+      const data = { type };
+      if (type === "browser" && this.infoURL) {
+        data.contentData = { defaultURL: this.infoURL };
+      }
+      me.addWidget(data);
       me.openManager();
     });
   }
@@ -80,7 +93,11 @@ export default class Sidebar {
    */
   addWidget({ type, id, contentData }) {
     if (!type in this.knownWidgets) {
-      throw new Error("Unsupported Widget type: " + type);
+      throw new Error(`Unsupported Widget type: "${type}"`);
+    }
+
+    if (this.disabledWidgets.includes(type)) {
+      return this.log(`Widget not added: Widget type "${type}" is disabled`);
     }
 
     const created = new this.knownWidgets[type].registration({
@@ -117,7 +134,11 @@ export default class Sidebar {
    */
   clearWidgetData() {
     for (const w of this.widgets) {
-      w.loadData();
+      const defaultData = {};
+      if (w.type === "browser" && this.infoURL) {
+        defaultData.defaultURL = this.infoURL;
+      }
+      w.loadData(defaultData);
     }
   }
 
@@ -139,14 +160,14 @@ export default class Sidebar {
   setWidgets(data) {
     if (!this.sidebarContainer) {
       $("#lh-button-widgets").hide();
-      return console.log("sidebarContainer not set: Widgets disabled");
+      return this.log("sidebarContainer not set: Widgets disabled");
     }
 
     // Destroy existing
     this.removeAllWidgets();
 
     if (!Array.isArray(data)) {
-      console.log("No existing widgets to register");
+      this.log("No existing widgets to register");
       return;
     }
 
@@ -154,5 +175,43 @@ export default class Sidebar {
     for (const w of data) {
       this.addWidget(w);
     }
+  }
+
+  /**
+   * Sets the default URL for new browser widgets.
+   * If infoURl is not a string, browser widgets will be disabled.
+   * @param {String} infoURL
+   */
+  setInfoURL(infoURL) {
+    this.infoURL = infoURL;
+    if (typeof this.infoURL !== "string") {
+      this.disableWidget("browser");
+    }
+  }
+
+  /**
+   * Prevents a widget from being added or drawn.
+   * @param {String} key
+   */
+  disableWidget(key) {
+    if (this.disabledWidgets.includes(key)) return;
+    this.disabledWidgets.push(key);
+    this.reloadWidgets();
+  }
+
+  /**
+   * Re-enables a widget that has been disabled.
+   * @param {String} key
+   */
+  enableWidget(key) {
+    this.disabledWidgets = this.disabledWidgets.filter((k) => k != key);
+  }
+
+  /**
+   * Forces a redraw of all widgets.
+   */
+  reloadWidgets() {
+    const data = this.getWidgets();
+    this.setWidgets(data);
   }
 }

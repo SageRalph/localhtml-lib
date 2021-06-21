@@ -1,0 +1,30 @@
+.lh-browser form {
+  width: 100%;
+}
+
+.lh-browser input {
+  padding: 0.5rem;
+  margin: 0;
+}
+
+.lh-browser input[type="search"] {
+  width: calc(100% - 3rem);
+}
+
+.lh-browser input[type="submit"] {
+  width: 3rem;
+  position: absolute;
+}
+
+.lh-browser-wrapper {
+  resize: vertical;
+  height: 50vh;
+  overflow: hidden;
+  border-bottom: solid gray 1px;
+}
+
+.lh-browser iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

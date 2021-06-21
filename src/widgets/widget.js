@@ -14,7 +14,7 @@ export default class Widget {
     this.type = type;
 
     if (!parent) throw new Error("Widget must have a parent");
-    this.container = $(`<div id=${this.id} class="lh-no-save"></div>`);
+    this.container = $(`<div id=${this.id} class="lh-widget"></div>`);
     $(parent).append(this.container);
 
     this.contentData = {};
@@ -28,7 +28,7 @@ export default class Widget {
    * Removes the widget.
    */
   destroy() {
-    $(this.container).empty();
+    $(this.container).remove();
   }
 
   /**

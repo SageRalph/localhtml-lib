@@ -61,7 +61,6 @@ export default class Form {
     this.sidebar.setWidgets(data["widgets"]);
     // Reset menus
     $(".lh-button-toggle").each(Menu.updateToggleButton);
-    this.menu.showInfo();
   }
 
   /**

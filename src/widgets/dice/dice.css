@@ -17,29 +17,10 @@
   background: url("d4.png") no-repeat;
 }
 
-.lh-dice-box {
-  margin-bottom: 2rem;
-  margin-top: 1rem;
-  position: relative;
-}
-
-.lh-dice-box .hidden {
-  opacity: 0;
-}
-
-.lh-dice-box summary {
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-bottom: 1rem;
-  padding-left: 1rem;
-}
-
-.lh-dice-picker {
-  width: 12rem;
-  display: inline-block;
-}
-
 .lh-dice-box .lh-dice {
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
   width: 3em;
   height: 5rem;
   background-size: 3rem;
@@ -49,6 +30,11 @@
   margin-bottom: 0;
   padding-top: 2rem;
   text-align: center;
+}
+
+.lh-dice-picker {
+  width: 12rem;
+  display: inline-block;
 }
 
 .lh-dice-history {
@@ -87,21 +73,4 @@
   margin-top: -25px;
   position: absolute;
   text-align: left;
-}
-
-/* New row flash */
-.lh-animation-flash-yellow {
-  animation: lh-animation-flash-yellow 1s ease-out;
-  animation-iteration-count: 1;
-}
-@keyframes lh-animation-flash-yellow {
-  0% {
-    background-color: #ffff9c;
-  }
-  50% {
-    background-color: #ffff9c;
-  }
-  100% {
-    background-color: transparent;
-  }
 }

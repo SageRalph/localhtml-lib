@@ -119,7 +119,8 @@ body {
   top: 0;
 }
 
-.lh-aside button {
+#lh-menu button,
+.lh-aside > button {
   padding: 0.5rem;
   padding-left: 4rem;
   font-size: 1rem;
@@ -130,7 +131,7 @@ body {
   cursor: pointer;
 }
 
-.lh-aside p {
+#lh-menu p {
   font-size: 0.8rem;
 }
 
@@ -138,20 +139,12 @@ body {
   display: none;
 }
 
-.lh-info-container {
+.lh-sidebar-container {
   right: 0;
   width: 25rem;
   position: fixed;
   display: flex;
   flex-flow: column;
-}
-
-#lh-info-frame {
-  /* display: none; */
-  width: 100%;
-  height: calc(100% - 10rem);
-  border: none;
-  margin: 0;
 }
 
 .lh-dialog-wrapper {
@@ -209,6 +202,39 @@ body {
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.lh-widget {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.lh-widget summary {
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.lh-animation-flash-yellow {
+  animation: lh-animation-flash-yellow 1s ease-out;
+  animation-iteration-count: 1;
+}
+@keyframes lh-animation-flash-yellow {
+  0% {
+    background-color: #ffff9c;
+  }
+  50% {
+    background-color: #ffff9c;
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
 .lh-quill-field .ql-editor a {
@@ -281,7 +307,7 @@ div.ql-editor {
 }
 
 @media screen and (max-width: calc(935px + 60rem)) {
-  .lh-info-container {
+  .lh-sidebar-container {
     padding-right: 0;
   }
 }
@@ -291,7 +317,7 @@ div.ql-editor {
     margin-left: 25rem;
   }
   /* Not supported on narrow screens */
-  .lh-info-container {
+  .lh-sidebar-container {
     display: none !important;
   }
 }

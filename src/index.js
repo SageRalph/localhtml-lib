@@ -91,14 +91,20 @@ export default class localhtml {
       if (infoContainer.length !== 1)
         throw "infoContainer must be or match a single element";
       this.infoContainer = infoContainer;
-      infoContainer.addClass("lh-info-container");
+      infoContainer.addClass("lh-sidebar-container");
 
-      this.sidebarContainer = $(`<div class="lh-sidebar-container"></div>`);
-      $(this.infoContainer).prepend(this.sidebarContainer);
+      this.sidebarContainer = $(
+        `<div class="lh-widget-container lh-no-save"></div>`
+      );
+      $(this.infoContainer).append(this.sidebarContainer);
     }
 
-    this.menu = new Menu({ infoContainer, infoURL });
-    this.sidebar = new Sidebar({ sidebarContainer: this.sidebarContainer });
+    this.menu = new Menu({});
+    this.sidebar = new Sidebar({
+      sidebarContainer: this.sidebarContainer,
+      infoURL,
+      log,
+    });
     this.pages = new Pages({ log });
     this.meta = new Meta({
       customSheetName,
@@ -123,7 +129,7 @@ export default class localhtml {
       loadData: this.form.loadFromObject.bind(this.form),
       clearData: this.form.clearData.bind(this.form),
       getSheetName: this.meta.sheetName.bind(this.meta),
-      setInfoURL: this.menu.setInfoURL.bind(this.menu),
+      setInfoURL: this.sidebar.setInfoURL.bind(this.sidebar),
       addWidget: this.sidebar.addWidget.bind(this.sidebar),
       removeWidget: this.sidebar.removeWidget.bind(this.sidebar),
       clearWidgetData: this.sidebar.clearWidgetData.bind(this.sidebar),
@@ -150,9 +156,6 @@ export default class localhtml {
 
     this.log("SETUP TOGGLE BUTTONS");
     Menu.toggleButtonSetup();
-
-    this.log("SETUP INFO");
-    this.menu.infoButtonSetup();
 
     this.log("SETUP BUTTONS");
     if (this.menuContainer)
