@@ -36,9 +36,8 @@
 
     <aside id="infoContainer" class="lh-aside">
       <!-- 
-        This panel can be shown/hidden from the menu.
-        An iframe will be injected here if infoURL is set.
-        Alternatively, you can hardcode anything you want here (e.g. instructions).
+        This panel will contain any widgets the user adds.
+        You can also hardcode anything you want here (e.g. instructions).
       -->
     </aside>
 
@@ -158,7 +157,7 @@
         // The menu will be injected here
         menuContainer: "#menuContainer",
 
-        // The info frame will be injected here
+        // The widget sidebar will be injected here
         infoContainer: "#infoContainer",
 
         // Only forms matching this selector will have data persisted
@@ -179,7 +178,7 @@
         // Function for determining the suggested filename when saving
         customSheetName: customSheetName,
 
-        // Target URL for the the info frame
+        // Default URL for Browser widgets. A non-string value will disable them.
         infoURL: "https://example.com",
 
         // URL of the latest version of the sheet - Required for automatic updates
