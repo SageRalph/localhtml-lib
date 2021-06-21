@@ -3,9 +3,10 @@
  * All widgets should be registered here.
  */
 
-import Notepad from "./widgets/notepad/notepad";
-import Dice from "./widgets/dice/dice";
-import Browser from "./widgets/browser/browser";
+import WidgetNotepad from "./widgets/notepad/notepad";
+import WidgetDice from "./widgets/dice/dice";
+import WidgetStopwatch from "./widgets/stopwatch/stopwatch";
+import WidgetBrowser from "./widgets/browser/browser";
 
 export default class Sidebar {
   constructor({ sidebarContainer, infoURL = "", disabledWidgets = [], log }) {
@@ -14,9 +15,10 @@ export default class Sidebar {
 
     this.widgets = [];
     this.knownWidgets = {
-      notepad: { name: "Notepad", registration: Notepad },
-      dice: { name: "Dice Box", registration: Dice },
-      browser: { name: "Browser", registration: Browser },
+      notepad: { name: "Notepad", registration: WidgetNotepad },
+      dice: { name: "Dice Box", registration: WidgetDice },
+      stopwatch: { name: "Stopwatch", registration: WidgetStopwatch },
+      browser: { name: "Browser", registration: WidgetBrowser },
     };
     this.disabledWidgets = disabledWidgets;
     this.setInfoURL(infoURL);

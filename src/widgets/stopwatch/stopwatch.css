@@ -1,0 +1,39 @@
+.lh-button-start {
+  background: url("../../../node_modules/@fortawesome/fontawesome-free/svgs/solid/play.svg")
+    no-repeat;
+}
+
+.lh-button-pause {
+  background: url("../../../node_modules/@fortawesome/fontawesome-free/svgs/solid/pause.svg")
+    no-repeat;
+}
+
+.lh-button-reset {
+  background: url("../../../node_modules/@fortawesome/fontawesome-free/svgs/solid/undo.svg")
+    no-repeat;
+}
+
+.lh-button-alarm {
+  background: url("../../../node_modules/@fortawesome/fontawesome-free/svgs/solid/bell.svg")
+    no-repeat;
+}
+
+.lh-stopwatch-form {
+  padding: 0 3rem;
+}
+
+.lh-stopwatch-form input,
+.lh-stopwatch-form button {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: none;
+  background-position: center;
+  margin: 0.5rem;
+  float: right;
+  cursor: pointer;
+}
+
+.lh-stopwatch-elapsed {
+  display: inline-block;
+  margin: 0.5rem;
+}
