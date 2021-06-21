@@ -1,0 +1,76 @@
+.lh-dice {
+  background: url("d6.png") no-repeat;
+}
+.lh-dice[data-sides="20"] {
+  background: url("d20.png") no-repeat;
+}
+.lh-dice[data-sides="12"] {
+  background: url("d12.png") no-repeat;
+}
+.lh-dice[data-sides="10"] {
+  background: url("d10.png") no-repeat;
+}
+.lh-dice[data-sides="8"] {
+  background: url("d8.png") no-repeat;
+}
+.lh-dice[data-sides="4"] {
+  background: url("d4.png") no-repeat;
+}
+
+.lh-dice-box .lh-dice {
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  width: 3em;
+  height: 5rem;
+  background-size: 3rem;
+  vertical-align: bottom;
+  padding: 0;
+  margin: 1rem;
+  margin-bottom: 0;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.lh-dice-picker {
+  width: 12rem;
+  display: inline-block;
+}
+
+.lh-dice-history {
+  width: 12rem;
+  height: 17rem;
+  box-sizing: border-box;
+  background: white;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.lh-dice-history th,
+.lh-dice-history td {
+  width: 12rem;
+  padding-left: 1.5rem;
+}
+
+.lh-dice-box input[type="reset"] {
+  font-size: 1rem;
+  background: none;
+  border: none;
+  font-weight: bold;
+  position: absolute;
+  top: 2rem;
+  right: 0.8rem;
+  cursor: pointer;
+}
+
+/* scrollable table */
+.lh-dice-history {
+  display: inline-block;
+  overflow-y: scroll;
+}
+.lh-dice-history th div {
+  width: 6rem;
+  margin-top: -25px;
+  position: absolute;
+  text-align: left;
+}

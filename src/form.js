@@ -9,8 +9,9 @@ import { saveAs } from "file-saver";
 import Menu from "./menu";
 
 export default class Form {
-  constructor({ menu, pages, meta, formSelector, migrations, log }) {
+  constructor({ menu, sidebar, pages, meta, formSelector, migrations, log }) {
     this.menu = menu;
+    this.sidebar = sidebar;
     this.pages = pages;
     this.meta = meta;
     this.formSelector = formSelector;
@@ -56,9 +57,10 @@ export default class Form {
     // Update Quills
     this.pages.clearQuills();
     this.pages.setQuillPages(data);
+    // Update Widgets
+    this.sidebar.setWidgets(data["widgets"]);
     // Reset menus
     $(".lh-button-toggle").each(Menu.updateToggleButton);
-    this.menu.showInfo();
   }
 
   /**
@@ -94,6 +96,9 @@ export default class Form {
 
     // Add Quill pages
     Object.assign(data, this.pages.getQuillPages());
+
+    // Add widgets
+    data["widgets"] = this.sidebar.getWidgets();
 
     // Add sheet version (immutable)
     data["sheetVersion"] = $("#sheetVersion").text();

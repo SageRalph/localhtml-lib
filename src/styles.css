@@ -10,6 +10,10 @@
   background: url("../node_modules/@fortawesome/fontawesome-free/svgs/solid/save.svg")
     no-repeat;
 }
+#lh-button-widgets {
+  background: url("../node_modules/@fortawesome/fontawesome-free/svgs/solid/puzzle-piece.svg")
+    no-repeat;
+}
 #lh-button-export {
   background: url("../node_modules/@fortawesome/fontawesome-free/svgs/solid/print.svg")
     no-repeat;
@@ -21,6 +25,15 @@
 .lh-button-toggle-on {
   background: url("../node_modules/@fortawesome/fontawesome-free/svgs/regular/check-square.svg")
     no-repeat;
+}
+.lh-button-close {
+  background: url("../node_modules/@fortawesome/fontawesome-free/svgs/solid/times.svg")
+    no-repeat;
+  border: none;
+  background-position: center;
+  background-size: 1rem;
+  cursor: pointer;
+  padding: 0;
 }
 
 html,
@@ -106,7 +119,8 @@ body {
   top: 0;
 }
 
-.lh-aside button {
+#lh-menu button,
+.lh-aside > button {
   padding: 0.5rem;
   padding-left: 4rem;
   font-size: 1rem;
@@ -117,7 +131,7 @@ body {
   cursor: pointer;
 }
 
-.lh-aside p {
+#lh-menu p {
   font-size: 0.8rem;
 }
 
@@ -125,12 +139,102 @@ body {
   display: none;
 }
 
-#lh-info-frame {
-  /* display: none; */
-  width: 100%;
-  height: calc(100% - 10rem);
-  border: none;
-  margin: 0;
+.lh-sidebar-container {
+  right: 0;
+  width: 25rem;
+  position: fixed;
+  display: flex;
+  flex-flow: column;
+}
+
+.lh-dialog-wrapper {
+  max-width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lh-dialog {
+  background-color: white;
+  padding: 5rem;
+  position: fixed;
+  margin: auto;
+  width: 20rem;
+  top: 10vh;
+  z-index: 3;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.lh-dialog input[type="reset"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5rem;
+  height: 5rem;
+  padding: 1rem;
+  background-size: 1.5rem;
+}
+
+.lh-dialog select,
+.lh-dialog input {
+  padding: 0.5rem;
+}
+
+#lh-widget-list {
+  list-style-type: none;
+  position: relative;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+#lh-widget-list li {
+  padding: 0.5rem;
+  font-weight: bold;
+  height: 1rem;
+  position: relative;
+  margin-bottom: 1rem;
+  border-bottom: black 1px solid;
+  padding-left: 5px;
+}
+
+#lh-widget-list button {
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.lh-widget {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.lh-widget summary {
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.lh-animation-flash-yellow {
+  animation: lh-animation-flash-yellow 1s ease-out;
+  animation-iteration-count: 1;
+}
+@keyframes lh-animation-flash-yellow {
+  0% {
+    background-color: #ffff9c;
+  }
+  50% {
+    background-color: #ffff9c;
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
 .lh-quill-field .ql-editor a {
@@ -203,7 +307,7 @@ div.ql-editor {
 }
 
 @media screen and (max-width: calc(935px + 60rem)) {
-  .lh-info-container {
+  .lh-sidebar-container {
     padding-right: 0;
   }
 }
@@ -213,7 +317,7 @@ div.ql-editor {
     margin-left: 25rem;
   }
   /* Not supported on narrow screens */
-  .lh-info-container {
+  .lh-sidebar-container {
     display: none !important;
   }
 }

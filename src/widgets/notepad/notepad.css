@@ -1,0 +1,11 @@
+.lh-notepad .lh-quill-field {
+  height: 10rem;
+  resize: vertical;
+  overflow: hidden;
+  background: white;
+  border: solid gray 1px;
+}
+
+.lh-notepad .lh-quill-field .ql-editor {
+  padding: 0.5rem;
+}
