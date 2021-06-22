@@ -153,7 +153,6 @@ body {
 .lh-sidebar-container {
   right: 0;
   width: 25rem;
-  position: fixed;
   display: flex;
   flex-flow: column;
 }
