@@ -17,7 +17,7 @@
   background: url("d4.png") no-repeat;
 }
 
-.lh-dice-box .lh-dice {
+.lh-dicebox .lh-dice {
   font-size: 1rem;
   border: none;
   cursor: pointer;
@@ -52,7 +52,7 @@
   padding-left: 1.5rem;
 }
 
-.lh-dice-box input[type="reset"] {
+.lh-dicebox input[type="reset"] {
   font-size: 1rem;
   background: none;
   border: none;

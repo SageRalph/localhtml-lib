@@ -9,19 +9,15 @@ export default class WidgetNotepad extends Widget {
     super(args);
   }
 
-  destroy() {
+  _preDestroy() {
     this.editor.enable(false);
     this.editor = null;
-    $(this.container).remove();
   }
 
   _draw() {
     // Draw Template
     $(this.container).html(`
-      <details class="lh-notepad" open>
-        <summary>Notepad</summary>
-        <article class="lh-quill-field lh-quill-advanced"></article>
-      </details>  
+      <article class="lh-quill-field lh-quill-advanced"></article>
     `);
 
     // Draw content

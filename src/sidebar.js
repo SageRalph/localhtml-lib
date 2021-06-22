@@ -17,7 +17,7 @@ export default class Sidebar {
     this.widgets = [];
     this.knownWidgets = {
       notepad: { name: "Notepad", registration: WidgetNotepad },
-      dice: { name: "Dice Box", registration: WidgetDice },
+      dicebox: { name: "Dice Box", registration: WidgetDice },
       stopwatch: { name: "Stopwatch", registration: WidgetStopwatch },
       browser: { name: "Browser", registration: WidgetBrowser },
     };
@@ -36,7 +36,7 @@ export default class Sidebar {
       .map(
         (w) =>
           `<li>
-            ${me.knownWidgets[w.type].name} 
+            ${w.displayName} 
             <button class="lh-button-remove-widget lh-button-close"></button>
           </li>`
       )
@@ -81,7 +81,7 @@ export default class Sidebar {
   /**
    * Creates a new Widget with a random name.
    */
-  addWidget({ type, id, contentData }) {
+  addWidget({ type, id, contentData, displayName }) {
     if (!type in this.knownWidgets) {
       throw new Error(`Unsupported Widget type: "${type}"`);
     }
@@ -90,10 +90,15 @@ export default class Sidebar {
       return this.log(`Widget not added: Widget type "${type}" is disabled`);
     }
 
+    if (!displayName) {
+      displayName = this.knownWidgets[type].name;
+    }
+
     const created = new this.knownWidgets[type].registration({
       parent: this.sidebarContainer,
       contentData,
       id,
+      displayName,
     });
 
     this.widgets.push(created);

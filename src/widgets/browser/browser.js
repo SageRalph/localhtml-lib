@@ -11,45 +11,29 @@ export default class WidgetBrowser extends Widget {
   _draw() {
     const me = this;
 
-    const isOpen = $(this.container).find(".lh-browser").prop("open");
+    const url = this.contentData.url || this.contentData.defaultURL || "";
 
     // Draw Template
     $(this.container).html(`
-      <details class="lh-browser" ${isOpen ? "open" : ""}>
-        <summary>Browser</summary>
-        <form>
-          <input type="search" placeholder="Enter web address" value="${
-            this.contentData.url || this.contentData.defaultURL || ""
-          }" />
-          <input type="submit" value="GO"/>
-      </details>  
+      <form>
+        <input type="search" placeholder="Enter web address" value="${url}" />
+        <input type="submit" value="GO"/>
+      </form>
     `);
 
-    // Draw content if open
-    if (isOpen && this.contentData.url) {
-      $(this.container)
-        .find(".lh-browser")
-        .append(`
+    // Draw content
+    if (url) {
+      $(this.container).append(`
         <div class="lh-browser-wrapper">
-          <iframe src="${this.contentData.url}"></iframe>
+          <iframe src="${url}"></iframe>
         </div>`);
     }
 
-    // Setup actions
     $(this.container)
-      .find(".lh-browser summary")
-      .on("click", function (e) {
-        $(me.container).find(".lh-browser").prop("open", !isOpen);
-        me._draw();
-      });
-
-    $(this.container)
-      .find(".lh-browser form")
+      .find("form")
       .on("submit", function (e) {
         e.preventDefault();
-        me.contentData.url = $(me.container)
-          .find(".lh-browser input[type=search]")
-          .val();
+        me.contentData.url = $(me.container).find("input[type=search]").val();
         me._draw();
       });
   }

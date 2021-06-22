@@ -119,6 +119,17 @@ body {
   top: 0;
 }
 
+.lh-widget-name {
+  cursor: text;
+}
+
+.lh-icon-button {
+  height: 2rem;
+  width: 2rem;
+  border: none;
+  cursor: pointer;
+}
+
 #lh-menu button,
 .lh-aside > button {
   padding: 0.5rem;

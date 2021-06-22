@@ -4,7 +4,7 @@ import "./dice.css";
 
 export default class WidgetDice extends Widget {
   constructor(args) {
-    args.type = "dice";
+    args.type = "dicebox";
     super(args);
   }
 
@@ -13,27 +13,24 @@ export default class WidgetDice extends Widget {
 
     // Draw Template
     $(this.container).html(`
-      <details class="lh-dice-box" open>
-        <summary>Dice Box</summary>
-        <section class="lh-dice-picker">
-          <button class="lh-dice" data-sides="20">d20</button>
-          <button class="lh-dice" data-sides="12">d12</button>
-          <button class="lh-dice" data-sides="10">d10</button>
-          <button class="lh-dice" data-sides="8">d8</button>
-          <button class="lh-dice" data-sides="6">d6</button>
-          <button class="lh-dice" data-sides="4">d4</button>
-        </section>
-        <table class="lh-dice-history" title="Click on dice to roll them">
-          <thead>
-            <th><div>Dice</div></th>
-            <th><div>Roll</div></th>
-          </thead>
-          <tbody>
-            <tr class="hidden"><td>____</td><td>____</td></tr>
-          </tbody>
-        </table>
-        <input type="reset" value="X" title="Clear History"></input>
-      </details>  
+      <section class="lh-dice-picker">
+        <button class="lh-dice" data-sides="20">d20</button>
+        <button class="lh-dice" data-sides="12">d12</button>
+        <button class="lh-dice" data-sides="10">d10</button>
+        <button class="lh-dice" data-sides="8">d8</button>
+        <button class="lh-dice" data-sides="6">d6</button>
+        <button class="lh-dice" data-sides="4">d4</button>
+      </section>
+      <table class="lh-dice-history" title="Click on dice to roll them">
+        <thead>
+          <th><div>Dice</div></th>
+          <th><div>Roll</div></th>
+        </thead>
+        <tbody>
+          <tr class="hidden"><td>____</td><td>____</td></tr>
+        </tbody>
+      </table>
+      <input type="reset" value="X" title="Clear History"></input>
     `);
 
     // Draw content
@@ -52,7 +49,7 @@ export default class WidgetDice extends Widget {
         me._diceRollRecord(parseInt(this.dataset.sides || "6"));
       });
     $(this.container)
-      .find(".lh-dice-box input[type='reset']")
+      .find("input[type='reset']")
       .on("click", function (event) {
         me.loadData();
       });

@@ -19,15 +19,12 @@ export default class WidgetStopwatch extends Widget {
 
     // Draw Template
     $(this.container).html(`
-      <details class="lh-stopwatch" open>
-        <summary>Stopwatch</summary>
-        <form class="lh-stopwatch-form">
-          <h3 class="lh-stopwatch-elapsed"></h3>
-          <button class="lh-button-alarm" title="Set Alarm"></button>
-          <input type="reset" class="lh-button-reset" value="" title="Reset"/>
-          <input type="submit" class="lh-button-start" value="" title="Start/Pause"/>
-        </form>
-      </details>  
+      <form class="lh-stopwatch-form">
+        <h3 class="lh-stopwatch-elapsed"></h3>
+        <button class="lh-button-alarm" title="Set Alarm"></button>
+        <input type="reset" class="lh-button-reset" value="" title="Reset"/>
+        <input type="submit" class="lh-button-start" value="" title="Start/Pause"/>
+      </form>
     `);
 
     // Draw content
@@ -130,11 +127,10 @@ export default class WidgetStopwatch extends Widget {
     return seconds;
   }
 
-  destroy() {
+  _preDestroy() {
     if (this.interval) {
       clearInterval(this.interval);
     }
-    $(this.container).remove();
   }
 
   _startStop() {
@@ -172,7 +168,7 @@ export default class WidgetStopwatch extends Widget {
       this.contentData.alarmSet &&
       this.contentData.elapsed === this.contentData.alarm
     ) {
-      $(this.container).addClass("lh-animation-pulse-yellow");
+      $(this.superContainer).addClass("lh-animation-pulse-yellow");
       for (let i = 0; i < 5; i++) {
         setTimeout(WidgetStopwatch._beep, i * 500);
       }
@@ -192,6 +188,6 @@ export default class WidgetStopwatch extends Widget {
       .find(".lh-button-pause")
       .toggleClass("lh-button-start lh-button-pause");
 
-    $(this.container).removeClass("lh-animation-pulse-yellow");
+    $(this.superContainer).removeClass("lh-animation-pulse-yellow");
   }
 }
