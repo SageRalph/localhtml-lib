@@ -5,6 +5,7 @@
 
 import Dialog from "./dialog";
 import WidgetNotepad from "./widgets/notepad/notepad";
+import WidgetCalculator from "./widgets/calculator/calculator";
 import WidgetDice from "./widgets/dice/dice";
 import WidgetStopwatch from "./widgets/stopwatch/stopwatch";
 import WidgetBrowser from "./widgets/browser/browser";
@@ -17,6 +18,7 @@ export default class Sidebar {
     this.widgets = [];
     this.knownWidgets = {
       notepad: { name: "Notepad", registration: WidgetNotepad },
+      calculator: { name: "Calculator", registration: WidgetCalculator },
       dicebox: { name: "Dice Box", registration: WidgetDice },
       stopwatch: { name: "Stopwatch", registration: WidgetStopwatch },
       browser: { name: "Browser", registration: WidgetBrowser },

@@ -244,6 +244,10 @@ body {
   opacity: 0;
 }
 
+.lh-invalid-field {
+  border-color: red;
+}
+
 .lh-animation-flash-yellow {
   animation: lh-animation-flash-yellow 1s ease-out;
   animation-iteration-count: 1;

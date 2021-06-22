@@ -1,0 +1,18 @@
+.lh-calculator table {
+  width: 15rem;
+  margin-left: 1rem;
+}
+
+.lh-calculator input[type="button"],
+.lh-calculator input[type="submit"],
+.lh-calculator input[type="reset"] {
+  width: 100%;
+  height: 3rem;
+  font-size: 1.2rem;
+}
+
+.lh-calculator [name="display"] {
+  font-size: 1.2rem;
+  width: calc(100% - 0.5rem);
+  padding: 0.2rem;
+}
