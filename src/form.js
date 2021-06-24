@@ -91,6 +91,7 @@ export default class Form {
   getData() {
     let data = {};
     $(this.formSelector).each(function () {
+      if ($(this).closest(".lh-no-save").length) return;
       Object.assign(data, $(this).serializeJSON());
     });
 
