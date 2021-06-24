@@ -226,6 +226,13 @@ body {
   top: 0;
 }
 
+.lh-select {
+  display: flex;
+}
+.lh-select :first-child {
+  flex-grow: 1;
+}
+
 .lh-widget {
   margin-bottom: 2rem;
   margin-top: 1rem;

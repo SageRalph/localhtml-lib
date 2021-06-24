@@ -1,0 +1,22 @@
+.lh-counter form {
+  padding: 0 1rem;
+  flex-direction: row;
+  display: flex;
+}
+
+.lh-counter input[type="number"] {
+  margin: 0;
+  width: 5rem;
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.lh-counter pre {
+  margin: 0;
+  width: 2rem;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  font-size: 1.2rem;
+}

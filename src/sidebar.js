@@ -7,6 +7,7 @@ import Dialog from "./dialog";
 import WidgetNotepad from "./widgets/notepad/notepad";
 import WidgetCalculator from "./widgets/calculator/calculator";
 import WidgetDice from "./widgets/dice/dice";
+import WidgetCounter from "./widgets/counter/counter";
 import WidgetStopwatch from "./widgets/stopwatch/stopwatch";
 import WidgetBrowser from "./widgets/browser/browser";
 
@@ -20,6 +21,7 @@ export default class Sidebar {
       notepad: { name: "Notepad", registration: WidgetNotepad },
       calculator: { name: "Calculator", registration: WidgetCalculator },
       dicebox: { name: "Dice Box", registration: WidgetDice },
+      counter: { name: "Counter", registration: WidgetCounter },
       stopwatch: { name: "Stopwatch", registration: WidgetStopwatch },
       browser: { name: "Browser", registration: WidgetBrowser },
     };
@@ -55,10 +57,12 @@ export default class Sidebar {
         ${currentWidgets || "None"}
       </ol>
       <h2>New Addon</h2>
-      <select name="type">
-        ${possibleWidgets}
-      </select>
-      <input type="submit" value="Add" id="lh-button-add-widget"/>
+      <div class="lh-select">
+        <select name="type">
+          ${possibleWidgets}
+        </select>
+        <input type="submit" value="Add" id="lh-button-add-widget"/>
+      </div>
     `);
 
     manager.find(".lh-button-remove-widget").on("click", function (e) {
