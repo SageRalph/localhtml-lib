@@ -120,7 +120,9 @@ body {
 }
 
 .lh-widget-name {
-  cursor: text;
+  font-size: 1.5rem;
+  border: none;
+  background: transparent;
 }
 
 .lh-icon-button {

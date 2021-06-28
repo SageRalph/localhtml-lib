@@ -23,7 +23,7 @@ export default class Widget {
       <div id=${this.id} class="lh-widget">
         <details class="lh-${this.type}" open>
           <summary>
-            <span class="lh-widget-name" contenteditable="true">${this.displayName}<span>
+            <input type="text" class="lh-widget-name" contenteditable="true" value="${this.displayName}">
           </summary>
           <div class="lh-widget-container"></div>
         </details>
@@ -33,14 +33,23 @@ export default class Widget {
     this.container = this.superContainer.find(".lh-widget-container");
 
     // Save changes to name
-    this.superContainer.find(".lh-widget-name").on("keyup", function (e) {
-      e.preventDefault();
-      me.displayName = me.superContainer.find(".lh-widget-name").text();
-    });
-    this.superContainer.find(".lh-widget-name").on("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    });
+    this.superContainer
+      .find(".lh-widget-name")
+      .on("click submit", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      })
+      .on("keyup", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const nameElm = me.superContainer.find(".lh-widget-name");
+        // Prevent blank name
+        if (!nameElm.val().trim().length) {
+          nameElm.val(me.displayName);
+        } else {
+          me.displayName = nameElm.val();
+        }
+      });
 
     this.contentData = {};
     this.loadData(contentData);
