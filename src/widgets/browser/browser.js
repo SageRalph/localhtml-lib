@@ -23,18 +23,32 @@ export default class WidgetBrowser extends Widget {
 
     // Draw content
     if (url) {
-      $(this.container).append(`
+      const wrapper = $(`
         <div class="lh-browser-wrapper">
           <iframe src="${url}"></iframe>
-        </div>`);
+        </div>
+      `);
+
+      if (this.contentData.height) {
+        wrapper.height(this.contentData.height);
+      }
+
+      wrapper.appendTo(this.container);
     }
 
     $(this.container)
       .find("form")
       .on("submit", function (e) {
         e.preventDefault();
-        me.contentData.url = $(me.container).find("input[type=search]").val();
-        me._draw();
+        me.loadData(me._getContentData());
       });
+  }
+
+  _getContentData() {
+    this.contentData.url = $(this.container).find("input[type=search]").val();
+    this.contentData.height = $(this.container)
+      .find(".lh-browser-wrapper")
+      .height();
+    return this.contentData;
   }
 }

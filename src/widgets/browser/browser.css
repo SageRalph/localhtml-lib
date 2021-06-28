@@ -18,7 +18,7 @@
 
 .lh-browser-wrapper {
   resize: vertical;
-  height: 50vh;
+  height: 30vh;
   overflow: hidden;
   border-bottom: solid gray 1px;
 }

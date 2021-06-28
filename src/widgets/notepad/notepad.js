@@ -21,11 +21,17 @@ export default class WidgetNotepad extends Widget {
     `);
 
     // Draw content
+    if (this.contentData.height) {
+      $(this.container).find(".lh-quill-field").height(this.contentData.height);
+    }
     // When reloading this needs to be done asynchronously
     setTimeout(this._setupQuill.bind(this));
   }
 
   _getContentData() {
+    this.contentData.height = $(this.container)
+      .find(".lh-quill-field")
+      .height();
     this.contentData.quillData = this.editor.getContents();
     return this.contentData;
   }

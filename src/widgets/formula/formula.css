@@ -23,7 +23,7 @@
 }
 
 .lh-formula-history {
-  height: 17rem;
+  height: 8rem;
   box-sizing: border-box;
   background: white;
   border-collapse: collapse;
@@ -49,6 +49,7 @@
 .lh-formula-history {
   display: inline-block;
   overflow-y: scroll;
+  resize: vertical;
 }
 .lh-formula-history th div {
   margin-top: -25px;

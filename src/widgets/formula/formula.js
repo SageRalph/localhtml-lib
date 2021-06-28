@@ -29,6 +29,12 @@ export default class WidgetFormula extends Widget {
       this.contentData.history = [];
     }
 
+    if (this.contentData.height) {
+      $(this.container)
+        .find(".lh-formula-history")
+        .height(this.contentData.height);
+    }
+
     // Setup actions
     $(this.container)
       .find(".lh-formula-form")
@@ -52,6 +58,9 @@ export default class WidgetFormula extends Widget {
   }
 
   _getContentData() {
+    this.contentData.height = $(this.container)
+      .find(".lh-formula-history")
+      .height();
     this.contentData.eqText = $(this.container).find("[name=formula]").val();
     return this.contentData;
   }
