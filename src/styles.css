@@ -226,10 +226,10 @@ body {
   top: 0;
 }
 
-.lh-select {
+.lh-input-with-button {
   display: flex;
 }
-.lh-select :first-child {
+.lh-input-with-button :first-child {
   flex-grow: 1;
 }
 
@@ -266,7 +266,7 @@ body {
     background-color: #ffff9c;
   }
   100% {
-    background-color: transparent;
+    background-color: initial;
   }
 }
 

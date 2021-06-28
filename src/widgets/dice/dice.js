@@ -1,4 +1,5 @@
 import $ from "jquery";
+import Meta from "../../meta";
 import Widget from "../widget";
 import "./dice.css";
 
@@ -68,8 +69,9 @@ export default class WidgetDice extends Widget {
   }
 
   _record({ sides, value }) {
-    const row = `<tr class="lh-animation-flash-yellow"><td>d${sides}</td><td>${value}</td></tr>`;
+    const row = $(`<tr><td>d${sides}</td><td>${value}</td></tr>`);
     $(this.container).find(".lh-dice-history tbody").prepend(row);
+    Meta.flash(row);
   }
 
   /**

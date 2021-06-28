@@ -6,6 +6,7 @@
 import Dialog from "./dialog";
 import WidgetNotepad from "./widgets/notepad/notepad";
 import WidgetCalculator from "./widgets/calculator/calculator";
+import WidgetFormula from "./widgets/formula/formula";
 import WidgetDice from "./widgets/dice/dice";
 import WidgetCounter from "./widgets/counter/counter";
 import WidgetStopwatch from "./widgets/stopwatch/stopwatch";
@@ -20,6 +21,7 @@ export default class Sidebar {
     this.knownWidgets = {
       notepad: { name: "Notepad", registration: WidgetNotepad },
       calculator: { name: "Calculator", registration: WidgetCalculator },
+      formula: { name: "Formula", registration: WidgetFormula },
       dicebox: { name: "Dice Box", registration: WidgetDice },
       counter: { name: "Counter", registration: WidgetCounter },
       stopwatch: { name: "Stopwatch", registration: WidgetStopwatch },
@@ -57,7 +59,7 @@ export default class Sidebar {
         ${currentWidgets || "None"}
       </ol>
       <h2>New Addon</h2>
-      <div class="lh-select">
+      <div class="lh-input-with-button">
         <select name="type">
           ${possibleWidgets}
         </select>

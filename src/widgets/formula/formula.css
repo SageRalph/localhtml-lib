@@ -1,0 +1,56 @@
+.lh-formula {
+  padding: 0 1rem;
+}
+
+.lh-formula-form input {
+  padding: 0.5rem;
+}
+
+.lh-formula-history-container input[type="reset"] {
+  font-size: 1rem;
+  background: none;
+  border: none;
+  font-weight: bold;
+  position: absolute;
+  top: -1.5rem;
+  right: 0;
+  cursor: pointer;
+}
+
+.lh-formula-history-container {
+  margin-top: 2.5rem;
+  position: relative;
+}
+
+.lh-formula-history {
+  height: 17rem;
+  box-sizing: border-box;
+  background: white;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.lh-formula-history tbody tr {
+  cursor: pointer;
+}
+
+.lh-formula-history th,
+.lh-formula-history td {
+  width: 12rem;
+  padding-left: 1.5rem;
+}
+
+.lh-formula-history th div {
+  width: 6rem;
+  text-align: left;
+}
+
+/* scrollable table */
+.lh-formula-history {
+  display: inline-block;
+  overflow-y: scroll;
+}
+.lh-formula-history th div {
+  margin-top: -25px;
+  position: absolute;
+}

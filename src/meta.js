@@ -106,4 +106,11 @@ export default class Meta {
   static blink() {
     $(this).css({ opacity: 0 }).animate({ opacity: 1 }, 1000);
   }
+
+  static flash(element) {
+    element.addClass("lh-animation-flash-yellow");
+    setTimeout(function () {
+      element.removeClass("lh-animation-flash-yellow");
+    }, 1000);
+  }
 }
