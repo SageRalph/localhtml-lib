@@ -33,8 +33,9 @@ export default class Sidebar {
 
   /**
    * Displays the sidebar manager
+   * @param {String} defaultWidget type of widget to preselect for New Addon
    */
-  openManager() {
+  openManager({ defaultWidget }) {
     const me = this;
 
     const currentWidgets = this.widgets
@@ -67,11 +68,16 @@ export default class Sidebar {
       </div>
     `);
 
+    const selectElm = manager.find("[name=type]");
+    if (defaultWidget) {
+      selectElm.val(defaultWidget);
+    }
+
     manager.find(".lh-button-remove-widget").on("click", function (e) {
       e.preventDefault();
       const index = $(this).parent().index();
       me.removeWidget(index);
-      me.openManager();
+      me.openManager({ defaultWidget: selectElm.val() });
     });
 
     manager.on("submit", (e) => {
@@ -82,7 +88,7 @@ export default class Sidebar {
         data.contentData = { defaultURL: this.infoURL };
       }
       me.addWidget(data);
-      me.openManager();
+      me.openManager({ defaultWidget: selectElm.val() });
     });
   }
 

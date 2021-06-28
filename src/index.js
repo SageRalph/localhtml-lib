@@ -163,7 +163,7 @@ export default class localhtml {
     $("#lh-button-save").on("click", (e) => this.form.saveHTML());
     $("#lh-button-clear").on("click", (e) => this.form.clearData());
     $("#lh-button-export").on("click", Form.savePDF);
-    $("#lh-button-widgets").on("click", (e) => this.sidebar.openManager());
+    $("#lh-button-widgets").on("click", (e) => this.sidebar.openManager({}));
     $("#lh-button-add").on("click", (e) => this.pages.addPage());
 
     // Click file import when Import button is clicked
