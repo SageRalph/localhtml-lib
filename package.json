@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DavidRalph/localhtml-lib.git"
+    "url": "git+https://github.com/SageRalph/localhtml-lib.git"
   },
-  "author": "David.M.L.Ralph@gmail.com",
+  "author": "SageJeanRalph@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DavidRalph/localhtml-lib/issues"
+    "url": "https://github.com/SageRalph/localhtml-lib/issues"
   },
-  "homepage": "https://github.com/DavidRalph/localhtml-lib#readme",
+  "homepage": "https://github.com/SageRalph/localhtml-lib#readme",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "clean-webpack-plugin": "^3.0.0",
